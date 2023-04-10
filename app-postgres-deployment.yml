@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: exercise-app-postgres
+  labels:
+    app: exercise-app-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: exercise-app-postgres
+  template:
+    metadata:
+      labels:
+        app: exercise-app-postgres
+    spec:
+      containers:
+        - name: exercise-app-postgres
+          image: k3d-localhost:5000/exercise-app
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: postgres-secret
