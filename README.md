@@ -1,9 +1,9 @@
 # sample rest api with postgres db running in k8s 
 
 programs needed:
-`docker` (also docker service running and user in the docker group)
-`kubectl`
-`k3d`
+- `docker` (also docker service running and user in the docker group)
+- `kubectl`
+- `k3d`
 
 run `./start.sh` to run the api,
 or read the script and execute the commands one-by-one.
@@ -21,10 +21,10 @@ the database consists of two tables:
 - User
 - Post
 
-**User** saves each users' id, name, email, password (hashed),
+**User** saves each user's id, name, email, password (hashed),
 and the timestamps of its creation and latest update.
 
-**Post** saves each users' id, title, content, author's id and name,
+**Post** saves each post's id, title, content, author's id and name,
 and the timestamps of its creation and latest update.
 
 the details of the tables can be seen in the structs `User` and `Post`,
@@ -37,8 +37,9 @@ once the app and database are running
 you can access it at `localhost:8080`.
 
 there's no frontend, but you can use Postman or curl to test the api.
-(the `test` folder contains scripts that use curl to test the api.
-i recommend having `jq` installed to format the json responses (`./01-show_users.sh | jq`))
+
+the `test` folder contains scripts that use curl to test the api.
+i recommend having `jq` installed to format the json responses (e.g. `./01-show_users.sh | jq`)
 the endpoints are:
 - **POST** `/login`, which allows to login as a user (returns a token that lasts 1 hour)
 - **GET** `/users`, which shows all users (doesn't need token)
@@ -52,6 +53,7 @@ the endpoints are:
 - **PUT** `/posts/<id>`, which allows updating a post (needs token)
 - **DELETE** `/posts/<id>`, which allows deleting a post (needs token)
 - **GET** `/`, just shows a welcome message (doesn't need token)
+
 the two default users are:
-user: 'steven@gmail.com' | pass: 'password'
-user: 'luther@gmail.com' | pass: 'password'
+- user: 'steven@gmail.com' | pass: 'password'
+- user: 'luther@gmail.com' | pass: 'password'
